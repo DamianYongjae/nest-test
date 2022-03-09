@@ -6,19 +6,21 @@ import {
   Param,
   Patch,
   Post,
-  Query,
+  Req,
+  Res,
 } from "@nestjs/common";
 import { MoviesService } from "./movies.service";
 import { Movie } from "./entities/movie.entity";
 import { CreateMovieDto } from "./dto/create-movie.dto";
 import { UpdateMovieDto } from "./dto/update-move.dto";
+import { Request, Response } from "express";
 
 @Controller("movies") // 'movies' is entry point of this controller. using like router
 export class MoviesController {
   constructor(private readonly moviesService: MoviesService) {}
 
   @Get()
-  getAll(): Movie[] {
+  getAll(@Req() req: Request, @Res() res: Response): Movie[] {
     return this.moviesService.getAll();
   }
 
